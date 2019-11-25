@@ -1,0 +1,33 @@
+{
+  "name": "markdown-slides",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/copycut/markdown-slides.git",
+  "author": "chartrad <chartrad@groups.be>",
+  "license": "MIT",
+  "engines": {
+    "node": "10"
+  },
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server"
+  },
+  "dependencies": {
+    "vue": "^2.6.10",
+    "webpack": "^4.41.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.7.2",
+    "css-loader": "^3.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "postcss-loader": "^3.0.0",
+    "precss": "^4.0.0",
+    "uid": "^0.0.2",
+    "vue-loader": "^15.7.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.10",
+    "vuex": "^3.1.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  }
+}
