@@ -1,8 +1,8 @@
-# graph-lines-generator
+# markdown-slides
 
-Goal: Create curve lines from a list of item to a point.
+Goal: Create an central point for presentations using web technologies.
 
-Done with Vue.js by manipulating a SVG elment.
+Done with Vue.js and Vuex.
 
 Start projet
 
