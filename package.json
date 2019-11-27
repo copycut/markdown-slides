@@ -13,7 +13,10 @@
     "start": "webpack-dev-server"
   },
   "dependencies": {
+    "lodash": "^4.17.15",
+    "marked": "^0.7.0",
     "vue": "^2.6.10",
+    "vuex-persist": "^2.2.0",
     "webpack": "^4.41.2"
   },
   "devDependencies": {
