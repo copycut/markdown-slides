@@ -1,30 +1,31 @@
 <template>
-	<section class="app">
-		<Sidebar>
-			<Button class="presentation" @click="present">
-				Presentation mode
-			</Button>
-		</Sidebar>
-		<Editor />
-	</section>
+	<div class="app">
+		<section v-if="isPresentationMode" class="present">
+			<Slides />
+		</section>
+		<section v-if="!isPresentationMode" class="edition">
+			<Sidebar />
+			<Editor />
+		</section>
+	</div>
 </template>
 
 <script>
-import Sidebar from "./sidebar.vue";
-import Editor from "./editor/editor.vue";
-import Button from "./button.vue";
 import { PRESENTATION } from "../constants/presentation-modes";
+import Slides from "./slides/slides.vue";
+import Editor from "./editor/editor.vue";
+import Sidebar from "./sidebar.vue";
 
 export default {
-	components: { Sidebar, Editor, Button },
+	components: { Sidebar, Editor, Slides },
 	created() {
 		if (this.$store.getters.slides.length === 0) {
 			this.$store.dispatch("create");
 		}
 	},
-	methods: {
-		present() {
-			this.$store.dispatch("switchMode", PRESENTATION);
+	computed: {
+		isPresentationMode() {
+			return this.$store.getters.presentionMode === PRESENTATION;
 		}
 	}
 };
@@ -48,27 +49,27 @@ body {
 </style>
 
 <style scoped lang="scss">
-@import url(../style/variables.scss);
+@import url(../styles/variables.scss);
 
 .app {
 	font-family: sans-serif;
 	font-size: 1rem;
 	color: $grey-darker;
+}
+
+.present {
+	background-color: $white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+.edition {
 	background-color: $grey-lighter;
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
 	height: 100vh;
-}
-
-.main {
-	flex-grow: 1;
-	padding: 1rem;
-}
-
-.button {
-	padding: 0.5rem;
-	color: $white;
-	background-color: $green-dark;
 }
 </style>

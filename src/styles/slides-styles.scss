@@ -1,0 +1,81 @@
+@import "./variables";
+
+$fw-light: 300;
+$fw-normal: 400;
+$fw-bold: 700;
+$fw-black: 900;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0 0 0.25em;
+}
+
+h1 {
+	font-size: 1em;
+	font-weight: $fw-normal;
+}
+
+h2 {
+	font-size: 0.85em;
+}
+
+h3 {
+	font-size: 0.75em;
+}
+
+h4 {
+	font-size: 0.65em;
+}
+
+h5 {
+	font-size: 0.5em;
+}
+
+h6 {
+	font-size: 0.35em;
+}
+
+p {
+	font-size: 0.35em;
+	margin: 0;
+	padding-bottom: 0.25em;
+	color: $grey-darker;
+}
+
+strong {
+	font-weight: $fw-black;
+	color: $black;
+}
+
+ul,
+ol {
+	margin: 0;
+	padding: 0.25em 0 0.25em;
+}
+
+li {
+	font-size: 0.35em;
+	padding-bottom: 0.15em;
+}
+
+pre {
+	font-size: 0.3em;
+	font-family: "Courier New", Courier, monospace;
+	background-color: $grey-darker;
+	color: $grey-lighter;
+	overflow: auto;
+	width: 100%;
+	padding: 0.35em;
+}
+
+code {
+	white-space: pre-wrap;
+}
+
+a {
+	color: $purple;
+}

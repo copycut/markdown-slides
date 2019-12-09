@@ -8,31 +8,38 @@ Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== "production";
 
-const presentationMode = [EDITION, PRESENTATION];
+const presentationModes = [EDITION, PRESENTATION];
+
+const newSlide = {
+	id: uid(),
+	title: "new slide",
+	content: "# New slide"
+};
 
 const state = {
-	newSlide: {
-		id: "",
-		title: "new slide",
-		content: "# New slide"
-	},
+	newSlide,
 	slides: [],
-	selectedSlide: null,
-	prensentionMode: EDITION
+	selectedSlideId: null,
+	presentionMode: EDITION
 };
 
 const getters = {
 	slides: state => state.slides,
 	selectedSlide: state =>
-		state.slides.filter(slide => slide.id === state.selectedSlide)[0] || null
+		state.slides.filter(slide => slide.id === state.selectedSlideId)[0] || null,
+	presentionMode: state => state.presentionMode
 };
+
+function getIndex(slides = [], id = 0) {
+	return slides.findIndex(slide => slide.id === id);
+}
 
 const mutations = {
 	ADD_SLIDE(state, slide) {
 		state.slides.push({ ...state.newSlide, ...slide });
 	},
 	UPDATE_SLIDE(state, entry) {
-		const index = state.slides.findIndex(slide => slide.id === entry.id);
+		const index = getIndex(state.slides, entry.id);
 
 		if (index !== -1) {
 			const slide = state.slides[index];
@@ -44,22 +51,40 @@ const mutations = {
 	},
 	SELECT_SLIDE(state, id) {
 		if (!id) {
-			state.selectedSlide = state.slides[state.slides.length - 1].id;
+			state.selectedSlideId = state.slides[state.slides.length - 1].id;
 		}
 
-		if (state.selectedSlide === id) {
+		if (state.selectedSlideId === id) {
 			return;
 		}
 
-		state.selectedSlide = id;
+		state.selectedSlideId = id;
+	},
+	SELECT_PREVIOUS(state, id) {
+		const index = getIndex(state.slides, id);
+
+		if (index < 1) {
+			return (state.selectedSlideId = state.slides[state.slides.length - 1].id);
+		}
+
+		state.selectedSlideId = state.slides[index - 1].id;
+	},
+	SELECT_NEXT(state, id) {
+		const index = getIndex(state.slides, id);
+
+		if (index === -1 || index >= state.slides.length - 1) {
+			return (state.selectedSlideId = state.slides[0].id);
+		}
+
+		return (state.selectedSlideId = state.slides[index + 1].id);
 	},
 	SWITCH_MODE(state, mode) {
 		if (mode === state.isPrensentionMode) {
 			return;
 		}
 
-		if (presentationMode.includes(mode)) {
-			state.prensentionMode = mode;
+		if (presentationModes.includes(mode)) {
+			state.presentionMode = mode;
 		}
 	}
 };
@@ -81,6 +106,12 @@ const actions = {
 	},
 	select({ commit }, id) {
 		commit("SELECT_SLIDE", id);
+	},
+	selectPrevious({ commit }, id) {
+		commit("SELECT_PREVIOUS", id);
+	},
+	selectNext({ commit }, id) {
+		commit("SELECT_NEXT", id);
 	},
 	selectLatest({ commit }) {
 		commit("SELECT_SLIDE");

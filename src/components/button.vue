@@ -1,13 +1,11 @@
 <template>
-	<button type="button" class="button"><slot></slot></button>
+	<button type="button" class="button" @click="$emit('click', $event)">
+		<slot></slot>
+	</button>
 </template>
 
-<script>
-export default {};
-</script>
-
 <style scoped lang="scss">
-@import url(../style/variables.scss);
+@import url(../styles/variables.scss);
 
 .button {
 	border: none;
@@ -15,5 +13,6 @@ export default {};
 	color: $grey-light;
 	font-weight: bold;
 	cursor: pointer;
+	text-transform: uppercase;
 }
 </style>

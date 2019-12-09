@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import url(../../style/variables.scss);
+@import url(../../styles/variables.scss);
 
 .form {
 	display: flex;

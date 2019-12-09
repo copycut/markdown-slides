@@ -20,11 +20,14 @@
 				</Button>
 			</li>
 		</ul>
-		<slot />
+		<Button class="presentation" @click="present">
+			Presentation mode
+		</Button>
 	</aside>
 </template>
 
 <script>
+import { PRESENTATION } from "../constants/presentation-modes";
 import Button from "./button.vue";
 
 export default {
@@ -52,13 +55,16 @@ export default {
 		},
 		newSlide() {
 			this.$store.dispatch("create");
+		},
+		present() {
+			this.$store.dispatch("switchMode", PRESENTATION);
 		}
 	}
 };
 </script>
 
 <style scoped lang="scss">
-@import url(../style/variables.scss);
+@import url(../styles/variables.scss);
 
 .sidebar {
 	display: flex;
@@ -106,5 +112,11 @@ export default {
 
 .slide-list__title {
 	flex-grow: 1;
+}
+
+.presentation {
+	padding: 0.5rem;
+	color: $white;
+	background-color: $green-dark;
 }
 </style>
