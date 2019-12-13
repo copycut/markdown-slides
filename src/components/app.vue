@@ -1,5 +1,15 @@
 <template>
 	<div class="app">
+		<!-- NEW FEATURE -->
+		<Feature name="new-title" :data="$route.query">
+			<h1>New feature 🎉</h1>
+		</Feature>
+
+		<!-- NEW TIMED FEATURE -->
+		<Feature name="timed-feature">
+			<h1>This feature is new at this time 🚀</h1>
+		</Feature>
+
 		<section v-if="isPresentationMode" class="present">
 			<Slides />
 		</section>
@@ -11,13 +21,14 @@
 </template>
 
 <script>
+import Feature from "vue-feature-toggle";
 import { PRESENTATION } from "../constants/presentation-modes";
 import Slides from "./slides/slides.vue";
 import Editor from "./editor/editor.vue";
 import Sidebar from "./sidebar.vue";
 
 export default {
-	components: { Sidebar, Editor, Slides },
+	components: { Sidebar, Editor, Slides, Feature },
 	created() {
 		if (this.$store.getters.slides.length === 0) {
 			this.$store.dispatch("create");
