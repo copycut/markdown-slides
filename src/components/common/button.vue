@@ -5,7 +5,7 @@
 </template>
 
 <style scoped lang="scss">
-@import url(../styles/variables.scss);
+@import url(../../styles/variables.scss);
 
 .button {
   border: none;

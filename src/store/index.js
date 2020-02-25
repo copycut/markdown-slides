@@ -6,7 +6,7 @@ import { PRESENTATION, EDITION } from '../constants/presentation-modes'
 
 Vue.use(Vuex)
 
-const debug = process.env.NODE_ENV !== 'production'
+const debug = NODE_ENV !== 'production'
 
 const presentationModes = [EDITION, PRESENTATION]
 
@@ -46,6 +46,9 @@ const mutations = {
       state.slides.splice(index, 1, { ...slide, ...entry })
     }
   },
+  UPDATE_SLIDES(state, slides) {
+    state.slides = slides
+  },
   DELETE_SLIDE(state, id) {
     state.slides = state.slides.filter(slide => slide.id !== id)
   },
@@ -63,8 +66,6 @@ const mutations = {
   SELECT_PREVIOUS(state, id) {
     const index = getIndex(state.slides, id)
 
-    console.log('SELECT_PREVIOUS', index)
-
     if (index < 1) {
       return (state.selectedSlideId = state.slides[state.slides.length - 1].id)
     }
@@ -73,8 +74,6 @@ const mutations = {
   },
   SELECT_NEXT(state, id) {
     const index = getIndex(state.slides, id)
-
-    console.log('SELECT_NEXT', index)
 
     if (index === -1 || index >= state.slides.length - 1) {
       return (state.selectedSlideId = state.slides[0].id)
@@ -122,6 +121,9 @@ const actions = {
   },
   switchMode({ commit }, mode) {
     commit('SWITCH_MODE', mode)
+  },
+  updateSlides({ commit }, slides) {
+    commit('UPDATE_SLIDES', slides)
   },
 }
 

@@ -14,7 +14,7 @@
 import { PRESENTATION } from '../constants/presentation-modes'
 import Slides from './slides/slides.vue'
 import Editor from './editor/editor.vue'
-import Sidebar from './sidebar.vue'
+import Sidebar from './sidebar/sidebar.vue'
 
 export default {
   components: { Sidebar, Editor, Slides },

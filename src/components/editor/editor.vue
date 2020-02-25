@@ -7,10 +7,10 @@
     <div class="editor__wrapper">
       <textarea
         class="editor__input"
-        :value="selectedSlide && selectedSlide.content"
+        :value="content"
         @input="update"
       ></textarea>
-      <Preview :content="selectedSlide.content" />
+      <Preview :content="content" />
     </div>
   </div>
 </template>
@@ -25,6 +25,13 @@ export default {
   computed: {
     selectedSlide() {
       return this.$store.getters.selectedSlide
+    },
+    content() {
+      if (!this.selectedSlide) {
+        return ''
+      }
+
+      return this.selectedSlide.content
     },
   },
   methods: {

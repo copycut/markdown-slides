@@ -6,7 +6,7 @@
 
 <script>
 import { EDITION } from '../../constants/presentation-modes'
-import Button from '../button.vue'
+import Button from '../common/button.vue'
 
 export default {
   components: { Button },
