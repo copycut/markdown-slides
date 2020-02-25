@@ -1,6 +1,8 @@
+const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
+const pkg = require('./package.json')
 
 module.exports = {
   entry: './src/index.js',
@@ -25,6 +27,10 @@ module.exports = {
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: 'index.html',
+    }),
+    new webpack.DefinePlugin({
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      VERSION: JSON.stringify(pkg.version),
     }),
   ],
 }

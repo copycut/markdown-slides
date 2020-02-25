@@ -3,37 +3,40 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/copycut/markdown-slides.git",
-  "author": "chartrad <chartrad@groups.be>",
+  "author": "Didier Chartra <copycut.design@gmail.com>",
   "license": "MIT",
   "engines": {
     "node": "10"
   },
   "scripts": {
-    "build": "webpack",
-    "start": "webpack-dev-server --open"
+    "build": "cross-env NODE_ENV=production webpack",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --open"
   },
   "dependencies": {
     "lodash": "^4.17.15",
-    "marked": "^0.7.0",
-    "vue": "^2.6.10",
-    "vue-resize-text": "^0.1.0",
+    "marked": "^0.8.0",
+    "uid": "^0.0.2",
+    "vue": "^2.6.11",
+    "vue-resize-text": "^0.1.1",
+    "vuedraggable": "^2.23.2",
+    "vuex": "^3.1.2",
     "vuex-persist": "^2.2.0",
-    "webpack": "^4.41.2"
+    "webpack": "^4.41.6"
   },
   "devDependencies": {
-    "autoprefixer": "^9.7.3",
-    "css-loader": "^3.2.1",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.0.1",
+    "autoprefixer": "^9.7.4",
+    "cross-env": "^7.0.0",
+    "css-loader": "^3.4.2",
+    "eslint": "^6.8.0",
+    "eslint-plugin-vue": "^6.2.1",
     "html-webpack-plugin": "^3.2.0",
+    "postcss-color-mod-function": "^3.0.3",
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
-    "uid": "^0.0.2",
-    "vue-loader": "^15.7.2",
+    "vue-loader": "^15.9.0",
     "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "^2.6.10",
-    "vuex": "^3.1.2",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
+    "vue-template-compiler": "^2.6.11",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   }
 }
