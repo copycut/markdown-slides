@@ -6,7 +6,7 @@
   "author": "Didier Chartra <copycut.design@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": "10"
+    "node": ">=10"
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
