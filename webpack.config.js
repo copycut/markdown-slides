@@ -1,3 +1,4 @@
+/* eslint-disable */
 const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -26,7 +27,8 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      template: 'index.html',
+      template: 'src/index.html',
+      favicon: 'src/favicon.ico',
     }),
     new webpack.DefinePlugin({
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
