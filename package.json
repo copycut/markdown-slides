@@ -10,9 +10,26 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --open"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --open",
+    "test": "cross-env NODE_ENV=test jest --coverage"
+  },
+  "jest": {
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.vue$": "vue-jest"
+    }
   },
   "dependencies": {
+    "@vue/test-utils": "^1.0.0-beta.31",
+    "jest": "^25.1.0",
     "lodash": "^4.17.15",
     "marked": "^0.8.0",
     "uid": "^0.0.2",
@@ -24,7 +41,10 @@
     "webpack": "^4.41.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.6",
+    "@babel/preset-env": "^7.8.6",
     "autoprefixer": "^9.7.4",
+    "babel-jest": "^25.1.0",
     "cross-env": "^7.0.0",
     "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
@@ -33,6 +53,8 @@
     "postcss-color-mod-function": "^3.0.3",
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
+    "sinon": "^9.0.0",
+    "vue-jest": "^3.0.5",
     "vue-loader": "^15.9.0",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.11",

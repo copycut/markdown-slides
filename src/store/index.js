@@ -23,7 +23,7 @@ const state = {
   presentionMode: EDITION,
 }
 
-const getters = {
+export const getters = {
   slides: state => state.slides,
   selectedSlide: state =>
     state.slides.filter(slide => slide.id === state.selectedSlideId)[0] || null,
@@ -34,7 +34,7 @@ function getIndex(slides = [], id = 0) {
   return slides.findIndex(slide => slide.id === id)
 }
 
-const mutations = {
+export const mutations = {
   ADD_SLIDE(state, slide) {
     state.slides.push({ ...state.newSlide, ...slide })
   },
@@ -82,7 +82,7 @@ const mutations = {
     return (state.selectedSlideId = state.slides[index + 1].id)
   },
   SWITCH_MODE(state, mode) {
-    if (mode === state.isPrensentionMode) {
+    if (mode === state.presentionMode) {
       return
     }
 
@@ -92,13 +92,13 @@ const mutations = {
   },
 }
 
-const actions = {
+export const actions = {
   create({ commit }) {
     const id = uid()
     commit('ADD_SLIDE', { id })
     commit('SELECT_SLIDE', id)
   },
-  rename({ commit }, { title, id }) {
+  rename({ commit }, { id, title }) {
     commit('UPDATE_SLIDE', { id, title })
   },
   update({ commit }, { id, content }) {
