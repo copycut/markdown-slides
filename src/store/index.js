@@ -16,7 +16,7 @@ const newSlide = {
   content: '# New slide',
 }
 
-const state = {
+export const state = {
   newSlide,
   slides: [],
   selectedSlideId: null,
