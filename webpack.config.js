@@ -2,6 +2,7 @@
 const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const path = require('path')
 const pkg = require('./package.json')
 
@@ -33,6 +34,10 @@ module.exports = {
     new webpack.DefinePlugin({
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       VERSION: JSON.stringify(pkg.version),
+    }),
+    new PrerenderSPAPlugin({
+      staticDir: path.join(__dirname, 'dist'),
+      routes: ['/'],
     }),
   ],
 }
