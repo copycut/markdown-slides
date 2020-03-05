@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div id="root" class="app">
     <section v-if="isPresentationMode" class="present">
       <Slides />
     </section>

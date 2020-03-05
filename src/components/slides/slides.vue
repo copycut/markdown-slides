@@ -10,9 +10,13 @@
 import marked from 'marked'
 import Options from './options.vue'
 import Navigator from './navigator.vue'
+import ResizeText from 'vue-resize-text'
 
 export default {
   components: { Options, Navigator },
+  directives: {
+    ResizeText,
+  },
   data() {
     return { y: 0 }
   },

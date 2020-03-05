@@ -4,8 +4,12 @@
 
 <script>
 import marked from 'marked'
+import ResizeText from 'vue-resize-text'
 
 export default {
+  directives: {
+    ResizeText,
+  },
   props: {
     content: {
       type: String,
