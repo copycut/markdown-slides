@@ -12,8 +12,7 @@
       title="Remove this slide"
       v-if="isNotLastSlide"
       @click.stop="toggleRemove(slide.id)"
-      >-</Button
-    >
+    />
     <span
       :class="{
         confirm: true,
@@ -92,13 +91,13 @@ export default {
   }
 
   &.active {
-    background-color: $purple-dark;
+    background-color: $purple;
     color: $white;
 
     &:hover,
     &:focus,
     &:active {
-      background-color: color-mod($purple-dark whiteness(30%));
+      background-color: color-mod($purple whiteness(30%));
     }
   }
 
@@ -153,9 +152,29 @@ export default {
   }
 
   .remove {
+    position: relative;
     pointer-events: none;
     opacity: 0;
     transition: opacity 300ms ease-in-out;
+
+    &::after {
+      content: ' ';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 2px;
+      border-radius: 2px;
+      background-color: $white;
+      transform: translate(-50%, -50%);
+      transition: background-color 300ms ease;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $purple-dark;
+    }
   }
 }
 </style>

@@ -2,7 +2,7 @@
   <aside class="sidebar">
     <h1 class="title">
       Slides
-      <Button class="add" title="Add Slide" @click="newSlide">+</Button>
+      <Button class="add" title="Add Slide" @click="newSlide" />
     </h1>
 
     <div class="list">
@@ -89,20 +89,47 @@ export default {
     padding: 0;
     margin: 0;
     flex-grow: 1;
+    overflow-y: auto;
   }
 
   .add {
+    position: relative;
     border-radius: 40px;
     min-width: 20px;
     height: 20px;
     font-weight: bold;
     line-height: 20px;
+
+    &::after,
+    &::before {
+      content: ' ';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 2px;
+      border-radius: 2px;
+      background-color: $white;
+      transform: translate(-50%, -50%);
+      transition: background-color 300ms ease;
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $purple-dark;
+    }
   }
 
   .presentation {
     padding: 0.5rem;
     color: $white;
-    background-color: $green-dark;
+    background-color: $purple-dark;
+    box-shadow: 0 0 8px color-mod($grey-darker alpha(50%));
   }
 }
 </style>

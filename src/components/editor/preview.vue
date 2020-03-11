@@ -34,7 +34,6 @@ export default {
   justify-content: center;
   width: 50%;
   padding: 1rem;
-  border-left: 1px solid $grey-light;
   font-family: 'Lato', sans-serif;
   background-color: $white;
   overflow-y: auto;

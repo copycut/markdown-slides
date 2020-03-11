@@ -54,8 +54,7 @@ export default {
   flex-grow: 1;
   width: 16rem;
   height: 100vh;
-  background-color: $grey-lighter;
-  color: $grey-darker;
+  background-color: $black;
 }
 
 .editor__header {
@@ -75,15 +74,16 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   flex-grow: 1;
-  border-top: 1px solid $grey-light;
   overflow: hidden;
 }
 
 .editor__input {
+  color: $grey-lighter;
   width: 50%;
   resize: none;
   border: none;
-  background-color: $grey-lighter;
+  background-color: $black;
+  color: $white;
   font-family: 'Courier New', Courier, monospace;
   padding: 1rem;
   overflow-y: auto;
@@ -91,7 +91,6 @@ export default {
 
   &:focus {
     outline: none;
-    background-color: $grey-lightest;
   }
 }
 </style>

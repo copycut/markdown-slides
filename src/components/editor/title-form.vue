@@ -1,6 +1,5 @@
 <template>
   <section class="form">
-    <label class="form__label" for="slide_title">Title</label>
     <input
       class="form__input"
       id="slide_title"
@@ -30,31 +29,19 @@ export default {
 .form {
   display: flex;
   flex-flow: row nowrap;
-  padding-bottom: 1rem;
-}
-
-.form__label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-  color: $grey-lighter;
-  background-color: $grey;
-  border-radius: 0.25rem 0 0 0.25rem;
 }
 
 .form__input {
-  border: 0.1rem solid $grey;
-  border-radius: 0 0.25rem 0.25rem 0;
+  border: none;
   padding: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-family: sans-serif;
-  color: $grey-darker;
+  color: $grey-lighter;
   flex-grow: 1;
+  background: transparent;
 
   &:focus {
     outline: none;
-    border-color: $purple-dark;
   }
 }
 </style>

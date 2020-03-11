@@ -36,11 +36,11 @@ h5 {
 }
 
 h6 {
-  font-size: 0.35em;
+  font-size: 0.3em;
 }
 
 p {
-  font-size: 0.35em;
+  font-size: 0.3em;
   margin: 0;
   padding-bottom: 0.25em;
   color: $grey-darker;
@@ -58,21 +58,26 @@ ol {
 }
 
 li {
-  font-size: 0.35em;
+  font-size: 0.3em;
   padding-bottom: 0.15em;
 }
 
 pre {
-  font-size: 0.3em;
+  font-size: 0.25em;
   font-family: 'Courier New', Courier, monospace;
   background-color: $grey-darker;
   color: $grey-lighter;
   overflow: auto;
   width: 100%;
-  padding: 0.35em;
+  padding: 0.3em;
+
+  code {
+    color: $red;
+  }
 }
 
 code {
+  color: $purple-dark;
   white-space: pre-wrap;
 }
 
