@@ -1,0 +1,21 @@
+version: '3'
+services:
+  node:
+    image: markdown-slide
+    build: .
+    command: yarn start
+    environment:
+      - NODE_ENV=development
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./coverage:/var/www/coverage
+      - ./dist:/var/www/dist
+      - ./package.json:/var/www/package.json
+      - ./yarn.lock:/var/www/yarn.lock
+      - ./src:/var/www/src
+      - ./server:/var/www/server
+      - ./tests:/var/www/tests
+      - ./webpack.config.js:/var/www/webpack.config.js
+      - ./node_modules:/var/www/node_modules
+      - ./postcss.config.js:/var/www/postcss.config.js

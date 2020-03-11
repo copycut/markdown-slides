@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --open",
+    "start": "webpack-dev-server -host 0.0.0.0 --open",
     "test": "NODE_ENV=test jest",
     "deploy": "git subtree push --prefix dist origin gh-pages"
   },

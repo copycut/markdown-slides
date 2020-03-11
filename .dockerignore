@@ -1,0 +1,9 @@
+Dockerfile
+docker-compose.yml
+node_modules/*
+.git
+.gitignore
+README.md
+.npmignore
+LICENSE
+yarn.lock
