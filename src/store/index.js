@@ -11,7 +11,7 @@ const debug = NODE_ENV !== 'production'
 const presentationModes = [EDITION, PRESENTATION]
 
 const newSlide = {
-  id: uid(),
+  id: uid(32),
   title: 'new slide',
   content: '# New slide',
 }

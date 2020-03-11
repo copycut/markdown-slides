@@ -2,7 +2,7 @@
 
 Goal: Create an central point for presentations using web technologies.
 
-## Start projet
+## Start projet (local)
 
 ```bash
 yarn start
@@ -22,6 +22,13 @@ yarn test
 
 ## To do
 
+### Stack
+
+- [ ] Use Docker
+
+### Features
+
+- [ ] Review design
 - [ ] Add routing
 - [ ] Add multiples presentations management
 - [ ] Add user based management
