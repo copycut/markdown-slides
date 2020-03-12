@@ -12,7 +12,7 @@
     "build": "webpack",
     "start": "webpack-dev-server --open",
     "test": "NODE_ENV=test jest",
-    "deploy": "cd dist && git add --all && git commit -m \"Release at $(date)\" && git push"
+    "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {
     "@vue/test-utils": "^1.0.0-beta.32",
