@@ -1,7 +1,7 @@
 <template>
   <aside class="sidebar">
     <h1 class="title">
-      Slides
+      <span>Markdown<em>slides</em></span>
       <Button class="add" title="Add Slide" @click="newSlide" />
     </h1>
 
@@ -70,19 +70,24 @@ export default {
   padding: 1rem;
   height: 100vh;
   background-color: $grey-darker;
-  color: $grey-light;
 
   .title {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
-    font-size: 0.75rem;
+    font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 0.25rem;
     margin: 0;
     padding: 0 0 1rem;
+    color: $grey-lighter;
+
+    em {
+      color: $grey-light;
+      font-weight: normal;
+      font-style: normal;
+    }
   }
 
   .list {

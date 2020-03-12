@@ -1,7 +1,6 @@
 <template>
   <div class="editor">
     <div class="editor__header">
-      <h1 class="editor__title">Editor</h1>
       <TitleForm :slide="selectedSlide" />
     </div>
     <div class="editor__wrapper">
@@ -59,15 +58,6 @@ export default {
 
 .editor__header {
   padding: 1rem;
-}
-
-.editor__title {
-  font-size: 0.75rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.25rem;
-  margin: 0;
-  padding: 0 0 1rem;
 }
 
 .editor__wrapper {

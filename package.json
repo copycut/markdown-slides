@@ -10,8 +10,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "start": "node server/app.js",
-    "start:dev": "webpack-dev-server --host 0.0.0.0 --open",
+    "start": "webpack-dev-server --open",
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {

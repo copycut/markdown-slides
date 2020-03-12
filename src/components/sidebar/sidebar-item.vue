@@ -78,6 +78,7 @@ export default {
   cursor: pointer;
   transition: background-color 300ms ease-in-out;
   user-select: none;
+  color: $grey-light;
 
   &:hover,
   &:focus,
