@@ -1,129 +1,41 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import uid from 'uid'
 import VuexPersist from 'vuex-persist'
-import { PRESENTATION, EDITION } from '../constants/presentation-modes'
+import { EDITION } from '../constants/presentation-modes'
+import { actions } from './actions'
+import { mutations } from './mutations'
 
 Vue.use(Vuex)
 
 const debug = NODE_ENV !== 'production'
 
-const presentationModes = [EDITION, PRESENTATION]
-
-const newSlide = {
-  id: uid(32),
-  title: 'new slide',
-  content: '# New slide',
-}
-
 export const state = {
-  newSlide,
-  slides: [],
+  mode: EDITION,
+  selectedPresentationId: null,
   selectedSlideId: null,
-  presentionMode: EDITION,
+  presentations: [],
 }
 
 export const getters = {
-  slides: state => state.slides,
-  selectedSlide: state =>
-    state.slides.filter(slide => slide.id === state.selectedSlideId)[0] || null,
-  presentionMode: state => state.presentionMode,
-}
+  getMode: state => state.mode,
+  getPresentations: state => state.presentations,
+  getPresentationById: state => presentationId =>
+    state.presentations.find(
+      presentation => presentation.id === presentationId,
+    ),
+  getSelectedPresentationId: state => state.selectedPresentationId,
+  getSelectedPresentation: state =>
+    state.presentations.filter(
+      presentation => presentation.id === state.selectedPresentationId,
+    ),
+  getselectedSlideId: state => state.selectedSlideId,
+  getSelectedSlide: (state, getters) => {
+    const presentation = getters.getSelectedPresentation[0]
 
-function getIndex(slides = [], id = 0) {
-  return slides.findIndex(slide => slide.id === id)
-}
-
-export const mutations = {
-  ADD_SLIDE(state, slide) {
-    state.slides.push({ ...state.newSlide, ...slide })
-  },
-  UPDATE_SLIDE(state, entry) {
-    const index = getIndex(state.slides, entry.id)
-
-    if (index !== -1) {
-      const slide = state.slides[index]
-      state.slides.splice(index, 1, { ...slide, ...entry })
+    if (!presentation || !presentation.slides) {
+      return {}
     }
-  },
-  UPDATE_SLIDES(state, slides) {
-    state.slides = slides
-  },
-  DELETE_SLIDE(state, id) {
-    state.slides = state.slides.filter(slide => slide.id !== id)
-  },
-  SELECT_SLIDE(state, id) {
-    if (!id) {
-      state.selectedSlideId = state.slides[state.slides.length - 1].id
-    }
-
-    if (state.selectedSlideId === id) {
-      return
-    }
-
-    state.selectedSlideId = id
-  },
-  SELECT_PREVIOUS(state, id) {
-    const index = getIndex(state.slides, id)
-
-    if (index < 1) {
-      return (state.selectedSlideId = state.slides[state.slides.length - 1].id)
-    }
-
-    return (state.selectedSlideId = state.slides[index - 1].id)
-  },
-  SELECT_NEXT(state, id) {
-    const index = getIndex(state.slides, id)
-
-    if (index === -1 || index >= state.slides.length - 1) {
-      return (state.selectedSlideId = state.slides[0].id)
-    }
-
-    return (state.selectedSlideId = state.slides[index + 1].id)
-  },
-  SWITCH_MODE(state, mode) {
-    if (mode === state.presentionMode) {
-      return
-    }
-
-    if (presentationModes.includes(mode)) {
-      state.presentionMode = mode
-    }
-  },
-}
-
-export const actions = {
-  create({ commit }) {
-    const id = uid()
-    commit('ADD_SLIDE', { id })
-    commit('SELECT_SLIDE', id)
-  },
-  rename({ commit }, { id, title }) {
-    commit('UPDATE_SLIDE', { id, title })
-  },
-  update({ commit }, { id, content }) {
-    commit('UPDATE_SLIDE', { id, content })
-  },
-  remove({ commit }, id) {
-    commit('DELETE_SLIDE', id)
-  },
-  select({ commit }, id) {
-    commit('SELECT_SLIDE', id)
-  },
-  previousSlide({ commit }, id) {
-    commit('SELECT_PREVIOUS', id)
-  },
-  nextSlide({ commit }, id) {
-    commit('SELECT_NEXT', id)
-  },
-  selectLatest({ commit }) {
-    commit('SELECT_SLIDE')
-  },
-  switchMode({ commit }, mode) {
-    commit('SWITCH_MODE', mode)
-  },
-  updateSlides({ commit }, slides) {
-    commit('UPDATE_SLIDES', slides)
+    return presentation.slides.find(slide => slide.id === state.selectedSlideId)
   },
 }
 

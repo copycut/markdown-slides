@@ -8,6 +8,7 @@
         class="editor__input"
         :value="content"
         @input="update"
+        :disabled="!selectedSlide"
       ></textarea>
       <Preview :content="content" />
     </div>
@@ -23,7 +24,7 @@ export default {
   components: { TitleForm, Preview },
   computed: {
     selectedSlide() {
-      return this.$store.getters.selectedSlide
+      return this.$store.getters.getSelectedSlide
     },
     content() {
       if (!this.selectedSlide) {
@@ -35,7 +36,7 @@ export default {
   },
   methods: {
     update: debounce(function(event) {
-      this.$store.dispatch('update', {
+      this.$store.dispatch('updateSlide', {
         id: this.selectedSlide.id,
         content: event.target.value,
       })

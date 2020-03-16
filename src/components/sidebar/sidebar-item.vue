@@ -2,44 +2,41 @@
   <div
     :class="{
       item: true,
-      active: isSelected(slide && slide.id),
+      active: isSelected,
     }"
     @click="select(slide.id)"
   >
     <span class="slideTitle">{{ slide && slide.title }}</span>
     <Button
-      class="button remove"
+      class="remove"
       title="Remove this slide"
       v-if="isNotLastSlide"
       @click.stop="toggleRemove(slide.id)"
     />
-    <span
-      :class="{
-        confirm: true,
-        active: pendingDeleteId === slide.id,
-      }"
-    >
-      <span class="message">Are you sure to delete this slide?</span>
-      <Button class="button delete" @click.stop="remove(slide.id)">Ok</Button>
-      <Button class="button cancel" @click.stop="toggleRemove(null)">X</Button>
-    </span>
+    <ConfirmMessage
+      message="Are you sure to delete this slide?"
+      :confirm="pendingDeleteId === slide.id"
+      @confirm="remove(slide.id)"
+      @cancel="toggleRemove(null)"
+    />
   </div>
 </template>
 
 <script>
 import Button from '../common/button.vue'
+import ConfirmMessage from '../common/confirm-message.vue'
 
 export default {
-  data: function() {
+  data() {
     return {
       pendingDeleteId: null,
     }
   },
-  components: { Button },
-  props: ['slide', 'selectedSlide'],
+  components: { Button, ConfirmMessage },
+  props: ['slide', 'isNotLastSlide', 'selectedSlideId'],
   computed: {
-    isNotLastSlide() {
-      return this.$store.getters.slides.length > 1
+    isSelected() {
+      return this.$props.selectedSlideId === this.$props.slide.id
     },
   },
   methods: {
@@ -51,13 +48,10 @@ export default {
       this.pendingDeleteId = id
     },
     remove(id) {
-      this.$store.dispatch('remove', id)
+      this.$store.dispatch('removeSlide', id)
     },
     select(id) {
-      this.$store.dispatch('select', id)
-    },
-    isSelected(id) {
-      return this.selectedSlide && this.selectedSlide.id === id
+      this.$store.dispatch('selectSlide', id)
     },
   },
 }
@@ -79,6 +73,7 @@ export default {
   transition: background-color 300ms ease-in-out;
   user-select: none;
   color: $grey-light;
+  background-color: $black;
 
   &:hover,
   &:focus,
@@ -106,53 +101,13 @@ export default {
     flex-grow: 1;
   }
 
-  .confirm {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    transform: translateX(100%);
-    background-color: $red-dark;
-    color: $white;
-    transition: transform 300ms ease-in-out;
-    padding: 1rem;
-
-    &.active {
-      transform: translateX(0);
-    }
-  }
-
-  .button {
+  .remove {
     flex-shrink: 0;
     border-radius: 40px;
     min-width: 20px;
     height: 20px;
     font-weight: bold;
     line-height: 20px;
-  }
-
-  .delete {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  .cancel {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-left: 1px solid $red-dark;
-  }
-
-  .delete,
-  .cancel {
-    color: $white;
-    background-color: $red;
-  }
-
-  .remove {
     position: relative;
     pointer-events: none;
     opacity: 0;

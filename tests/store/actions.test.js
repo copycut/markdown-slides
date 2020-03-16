@@ -1,9 +1,17 @@
-import { actions } from '../../src/store'
+import { actions } from '../../src/store/actions'
 import { spy } from 'sinon'
 
-test('create', () => {
+test('addPresentation', () => {
   const commit = spy()
-  actions.create({ commit })
+  actions.addPresentation({ commit })
+
+  expect(commit.args[0][0]).toBe('ADD_PRESENTATION')
+  expect(commit.args[0][1]).toHaveProperty('id')
+})
+
+test('addSlide', () => {
+  const commit = spy()
+  actions.addSlide({ commit })
 
   expect(commit.args[0][0]).toBe('ADD_SLIDE')
   expect(commit.args[0][1]).toHaveProperty('id')
@@ -11,37 +19,55 @@ test('create', () => {
   expect(commit.args[1][1]).toBeDefined()
 })
 
-test('rename', () => {
+test('renameSlide', () => {
   const commit = spy()
   const slide = { title: 'test', id: '1' }
-  actions.rename({ commit }, slide)
+  actions.renameSlide({ commit }, slide)
 
   expect(commit.args[0][0]).toBe('UPDATE_SLIDE')
   expect(commit.args[0][1]).toStrictEqual(slide)
 })
 
-test('update', () => {
+test('updateSlide', () => {
   const commit = spy()
   const slide = { id: '1', content: 'This is content' }
-  actions.update({ commit }, slide)
+  actions.updateSlide({ commit }, slide)
 
   expect(commit.args[0][0]).toBe('UPDATE_SLIDE')
   expect(commit.args[0][1]).toStrictEqual(slide)
 })
 
-test('remove', () => {
+test('removePresentation', () => {
   const commit = spy()
   const id = '1'
-  actions.remove({ commit }, id)
+  actions.removePresentation({ commit }, id)
+
+  expect(commit.args[0][0]).toBe('DELETE_PRESENTATION')
+  expect(commit.args[0][1]).toBe(id)
+})
+
+test('removeSlide', () => {
+  const commit = spy()
+  const id = '1'
+  actions.removeSlide({ commit }, id)
 
   expect(commit.args[0][0]).toBe('DELETE_SLIDE')
   expect(commit.args[0][1]).toBe(id)
 })
 
-test('select', () => {
+test('selectPresentation', () => {
   const commit = spy()
   const id = '1'
-  actions.select({ commit }, id)
+  actions.selectPresentation({ commit }, id)
+
+  expect(commit.args[0][0]).toBe('SELECT_PRESENTATION')
+  expect(commit.args[0][1]).toBe(id)
+})
+
+test('selectSlide', () => {
+  const commit = spy()
+  const id = '1'
+  actions.selectSlide({ commit }, id)
 
   expect(commit.args[0][0]).toBe('SELECT_SLIDE')
   expect(commit.args[0][1]).toBe(id)

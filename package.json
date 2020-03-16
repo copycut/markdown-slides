@@ -11,6 +11,7 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server -host 0.0.0.0 --open",
+    "start:dev": "webpack-dev-server --open",
     "test": "NODE_ENV=test jest",
     "deploy": "git subtree push --prefix dist origin gh-pages"
   },
@@ -22,6 +23,7 @@
     "uid": "^1.0.0",
     "vue": "^2.6.11",
     "vue-resize-text": "^0.1.1",
+    "vue-router": "^3.1.6",
     "vuedraggable": "^2.23.2",
     "vuex": "^3.1.3",
     "vuex-persist": "^2.2.0",

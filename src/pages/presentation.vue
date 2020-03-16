@@ -1,10 +1,10 @@
 <template>
-  <div id="root" class="app">
+  <div>
     <section v-if="isPresentationMode" class="present">
       <Slides />
     </section>
     <section v-if="!isPresentationMode" class="edition">
-      <Sidebar />
+      <Sidebar :presentation="presentation" />
       <Editor />
     </section>
   </div>
@@ -12,50 +12,33 @@
 
 <script>
 import { PRESENTATION } from '../constants/presentation-modes'
-import Slides from './slides/slides.vue'
-import Editor from './editor/editor.vue'
-import Sidebar from './sidebar/sidebar.vue'
+import Slides from '../components/slides/slides.vue'
+import Editor from '../components/editor/editor.vue'
+import Sidebar from '../components/sidebar/sidebar.vue'
 
 export default {
   components: { Sidebar, Editor, Slides },
   created() {
-    if (this.$store.getters.slides.length === 0) {
-      this.$store.dispatch('create')
+    const presentation = this.$store.getters.getPresentationById(
+      this.$route.params.id,
+    )
+    if (!presentation) {
+      this.$router.push('/manager')
     }
   },
   computed: {
     isPresentationMode() {
-      return this.$store.getters.presentionMode === PRESENTATION
+      return this.$store.getters.getMode === PRESENTATION
+    },
+    presentation() {
+      return this.$store.getters.getPresentationById(this.$route.params.id)
     },
   },
 }
 </script>
 
-<style>
-html,
-body {
-  padding: 0;
-  margin: 0;
-  min-height: 100vh;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-</style>
-
 <style scoped lang="scss">
 @import url(../styles/variables.scss);
-
-.app {
-  font-family: sans-serif;
-  font-size: 1rem;
-  color: $grey-darker;
-}
 
 .present {
   background-color: $white;

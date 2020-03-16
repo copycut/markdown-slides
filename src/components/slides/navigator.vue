@@ -1,12 +1,52 @@
 <template>
-  <nav class="navigator">
-    <button type="button" class="arrow arrow--back" @click="$emit('back')" />
-    <button type="button" class="arrow arrow--next" @click="$emit('next')" />
+  <nav :class="{ navigator: true, active: isActive }">
+    <button type="button" class="arrow arrow--back" @click="goBack" />
+    <button type="button" class="arrow arrow--next" @click="goNext" />
   </nav>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    id: {
+      type: String,
+    },
+  },
+  data() {
+    return {
+      isActive: false,
+    }
+  },
+  mounted() {
+    window.addEventListener('keyup', this.control)
+  },
+  beforeDestroy() {
+    window.removeEventListener('keyup', this.control)
+  },
+  methods: {
+    timer() {
+      this.isActive = true
+      setTimeout(() => (this.isActive = false), 1500)
+    },
+    goBack() {
+      this.timer()
+      this.$store.dispatch('previousSlide', this.$props.id)
+    },
+    goNext() {
+      this.timer()
+      this.$store.dispatch('nextSlide', this.$props.id)
+    },
+    control({ key }) {
+      if (key === 'ArrowRight') {
+        this.goNext()
+      }
+
+      if (key === 'ArrowLeft') {
+        this.goBack()
+      }
+    },
+  },
+}
 </script>
 
 <style scoped lang="scss">
@@ -18,8 +58,12 @@ export default {}
   right: 2rem;
   display: flex;
   flex-flow: row nowrap;
-  opacity: 0.3;
+  opacity: 0;
   transition: opacity 300ms ease;
+
+  &.active {
+    opacity: 0.3;
+  }
 
   &:hover,
   &:focus-within {
