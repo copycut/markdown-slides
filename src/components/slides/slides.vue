@@ -2,7 +2,7 @@
   <div class="slides" @mousemove="updateCoordinates">
     <Options :show="showOption" />
     <div class="slide" v-html="compiledMarkdown" v-resize-text></div>
-    <Navigator @back="goBack" @next="goNext" />
+    <Navigator :id="getCurrentSlide.id" />
   </div>
 </template>
 
@@ -20,18 +20,12 @@ export default {
   data() {
     return { y: 0 }
   },
-  mounted() {
-    window.addEventListener('keyup', this.control)
-  },
-  beforeDestroy() {
-    window.removeEventListener('keyup', this.control)
-  },
   computed: {
     showOption() {
       return this.y <= 50
     },
     getCurrentSlide() {
-      return this.$store.getters.selectedSlide
+      return this.$store.getters.getSelectedSlide
     },
     compiledMarkdown: function() {
       const content = this.getCurrentSlide.content || ''
@@ -41,21 +35,6 @@ export default {
   methods: {
     updateCoordinates(event) {
       this.y = event.clientY
-    },
-    goBack() {
-      this.$store.dispatch('previousSlide', this.getCurrentSlide.id)
-    },
-    goNext() {
-      this.$store.dispatch('nextSlide', this.getCurrentSlide.id)
-    },
-    control({ key }) {
-      if (key === 'ArrowRight') {
-        this.goNext()
-      }
-
-      if (key === 'ArrowLeft') {
-        this.goBack()
-      }
     },
   },
 }

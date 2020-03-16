@@ -1,17 +1,29 @@
 <template>
   <aside class="sidebar">
-    <h1 class="title">
-      <span>Markdown<em>slides</em></span>
+    <Title>
       <Button class="add" title="Add Slide" @click="newSlide" />
-    </h1>
+    </Title>
+
+    <div class="presentation-config">
+      <input
+        class="presentation-title"
+        type="text"
+        v-model="presentationTitle"
+      />
+    </div>
 
     <div class="list">
+      <div v-if="isNoSlide" class="no-slides">
+        <span>There is no slides yet.</span>
+        <Button class="create" @click="newSlide">Create one</Button>
+      </div>
       <draggable v-model="sortedList">
         <SidebarItem
           v-for="slide in slides"
           :key="slide.id"
           :slide="slide"
-          :selectedSlide="selectedSlide"
+          :selectedSlideId="selectedSlideId"
+          :isNotLastSlide="isNotLastSlide"
         />
       </draggable>
     </div>
@@ -23,27 +35,44 @@
 import draggable from 'vuedraggable'
 import { PRESENTATION } from '../../constants/presentation-modes'
 import SidebarItem from './sidebar-item.vue'
+import Title from '../common/title.vue'
 import Button from '../common/button.vue'
 
 export default {
-  components: { Button, SidebarItem, draggable },
+  components: { Button, Title, SidebarItem, draggable },
+  props: ['presentation'],
   computed: {
+    presentationTitle: {
+      get() {
+        return this.$props.presentation.title
+      },
+      set(title) {
+        const id = this.$props.presentation.id
+        this.$store.dispatch('updatePresentation', { id, title })
+      },
+    },
     sortedList: {
       get() {
-        return this.$store.getters.slides
+        if (!this.$props.presentation) {
+          return []
+        }
+        return this.$props.presentation.slides
       },
       set(slides) {
         this.$store.dispatch('updateSlides', slides)
       },
     },
-    slides() {
-      return this.$store.getters.slides
-    },
-    selectedSlide() {
-      return this.$store.getters.selectedSlide
+    isNoSlide() {
+      return this.$props.presentation.slides.length === 0
     },
     isNotLastSlide() {
-      return this.$store.getters.slides.length > 1
+      return this.$props.presentation.slides.length > 1
+    },
+    slides() {
+      return this.$props.presentation.slides || []
+    },
+    selectedSlideId() {
+      return this.$store.getters.getselectedSlideId
     },
   },
   methods: {
@@ -51,7 +80,7 @@ export default {
       this.$store.dispatch('select', id)
     },
     newSlide() {
-      this.$store.dispatch('create')
+      this.$store.dispatch('addSlide')
     },
     present() {
       this.$store.dispatch('switchMode', PRESENTATION)
@@ -71,30 +100,29 @@ export default {
   height: 100vh;
   background-color: $grey-darker;
 
-  .title {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 1rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin: 0;
-    padding: 0 0 1rem;
-    color: $grey-lighter;
-
-    em {
-      color: $grey-light;
-      font-weight: normal;
-      font-style: normal;
-    }
-  }
-
   .list {
     padding: 0;
     margin: 0;
     flex-grow: 1;
     overflow-y: auto;
+  }
+
+  .no-slides {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    height: 100%;
+  }
+
+  .create {
+    border-radius: 20px;
+    font-weight: bold;
+    white-space: nowrap;
+    padding: 8px 16px;
+    flex-shrink: 0;
+    margin-top: 1rem;
   }
 
   .add {
@@ -135,6 +163,25 @@ export default {
     color: $white;
     background-color: $purple-dark;
     box-shadow: 0 0 8px color-mod($grey-darker alpha(50%));
+  }
+
+  .presentation-config {
+    padding: 8px 0;
+
+    .presentation-title {
+      width: 100%;
+      background: none;
+      border: 0;
+      font-size: 1rem;
+      color: $grey;
+      padding: 4px 0;
+
+      &:focus,
+      &:hover {
+        background-color: $black;
+        color: $grey-lighter;
+      }
+    }
   }
 }
 </style>

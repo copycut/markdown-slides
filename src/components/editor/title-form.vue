@@ -7,6 +7,7 @@
       :value="slide && slide.title"
       @change="update($event.target.value)"
       autofocus
+      :disabled="!slide"
     />
   </section>
 </template>
@@ -17,7 +18,7 @@ export default {
   methods: {
     update(title) {
       const { id } = this.slide
-      this.$store.dispatch('rename', { id, title })
+      this.$store.dispatch('renameSlide', { id, title })
     },
   },
 }

@@ -1,0 +1,19 @@
+{
+  "mode": "EDITION",
+  "selectedPresentationId": "<id>",
+  "selectedSlideId": "<slide-id>",
+  "presentations": [
+    {
+      "id": "<id>",
+      "title": "<presentation-title>",
+      "slides": [
+        {
+          "id": "<slide-id>",
+          "title": "<title>",
+          "content": "<content>",
+          "renderedContent": "<html-content>"
+        }
+      ]
+    }
+  ]
+}
