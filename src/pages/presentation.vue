@@ -19,11 +19,17 @@ import Sidebar from '../components/sidebar/sidebar.vue'
 export default {
   components: { Sidebar, Editor, Slides },
   created() {
+    const selectedPresentation = this.$store.getters.getSelectedPresentationId
     const presentation = this.$store.getters.getPresentationById(
       this.$route.params.id,
     )
+
     if (!presentation) {
       this.$router.push('/manager')
+    }
+
+    if (selectedPresentation !== this.$route.params.id) {
+      this.$store.dispatch('selectPresentation', this.$route.params.id)
     }
   },
   computed: {

@@ -1,6 +1,6 @@
 <template>
   <div :class="{ options: true, 'options--visible': show }">
-    <Button @click="edition">Back to the editor</Button>
+    <Button @click="edition">{{ $t('backToEditor') }}</Button>
   </div>
 </template>
 

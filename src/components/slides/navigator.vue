@@ -1,7 +1,17 @@
 <template>
   <nav :class="{ navigator: true, active: isActive }">
-    <button type="button" class="arrow arrow--back" @click="goBack" />
-    <button type="button" class="arrow arrow--next" @click="goNext" />
+    <button
+      type="button"
+      class="arrow arrow--back"
+      @click="goBack"
+      :title="$t('previous')"
+    />
+    <button
+      type="button"
+      class="arrow arrow--next"
+      @click="goNext"
+      :title="$t('next')"
+    />
   </nav>
 </template>
 
