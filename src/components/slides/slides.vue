@@ -1,7 +1,7 @@
 <template>
   <div class="slides" @mousemove="updateCoordinates">
     <Options :show="showOption" />
-    <div class="slide" v-html="compiledMarkdown" v-resize-text></div>
+    <div class="slide" v-html="compiledMarkdown" v-resize-text />
     <Navigator :id="getCurrentSlide.id" />
   </div>
 </template>

@@ -2,12 +2,12 @@
   <span :class="{ confirm: true, active: this.confirm }" @click.stop.prevent>
     <span class="message">{{ message }}</span>
     <span class="button-group">
-      <Button class="button delete" @click.stop.prevent="$emit('confirm')"
-        >Yes</Button
-      >
-      <Button class="button cancel" @click.stop.prevent="$emit('cancel')"
-        >No</Button
-      >
+      <Button class="button delete" @click.stop.prevent="$emit('confirm')">{{
+        $t('yes')
+      }}</Button>
+      <Button class="button cancel" @click.stop.prevent="$emit('cancel')">{{
+        $t('no')
+      }}</Button>
     </span>
   </span>
 </template>
@@ -43,6 +43,7 @@ export default {
   color: $white;
   transition: transform 300ms ease-in-out;
   padding: 1rem;
+  font-size: 1rem;
 
   &.active {
     transform: translateX(0);

@@ -9,13 +9,14 @@
     <span class="slideTitle">{{ slide && slide.title }}</span>
     <Button
       class="remove"
-      title="Remove this slide"
+      :title="$t('remove', ['slide'])"
       v-if="isNotLastSlide"
       @click.stop="toggleRemove(slide.id)"
     />
     <ConfirmMessage
-      message="Are you sure to delete this slide?"
+      :message="$t('deleteSlide')"
       :confirm="pendingDeleteId === slide.id"
+      class="confirm"
       @confirm="remove(slide.id)"
       @cancel="toggleRemove(null)"
     />
@@ -131,6 +132,10 @@ export default {
     &:focus {
       background-color: $purple-dark;
     }
+  }
+
+  .confirm {
+    font-size: 0.8rem;
   }
 }
 </style>

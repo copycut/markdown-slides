@@ -1,0 +1,30 @@
+{
+  "fr": {
+    "addNew": "Nouveau {0}",
+    "remove": "Supprimer {0}",
+    "yes": "Oui",
+    "no": "Non",
+    "deletePresentation": "Êtes-vous sûr de supprimer cette présentation ?",
+    "deleteSlide": "Êtes-vous sûr de supprimer ce slide ?",
+    "presentation": "présentation",
+    "noSlides": "Il n'y a pas encore de slides.",
+    "present": "Présenter",
+    "backToEditor": "Retour à l'éditeur",
+    "previous": "Précédent",
+    "next": "Suivant"
+  },
+  "en": {
+    "addNew": "Add new {0}",
+    "remove": "Remove {0}",
+    "yes": "Yes",
+    "no": "No",
+    "deletePresentation": "Are you sure to delete this presentation?",
+    "deleteSlide": "Are you sure to delete this slide?",
+    "presentation": "slideshow",
+    "noSlides": "There is no slides yet.",
+    "present": "Present",
+    "backToEditor": "Back to the editor",
+    "previous": "Previous",
+    "next": "Next"
+  }
+}

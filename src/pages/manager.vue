@@ -5,7 +5,7 @@
     </header>
     <main class="main">
       <button type="button" class="create-presentation" @click="createNew">
-        Add new
+        {{ $t('addNew', []) }}
       </button>
       <router-link
         class="presentation"
@@ -17,11 +17,12 @@
         <button
           type="button"
           class="remove"
+          :title="$t('remove', [$t('presentation')])"
           @click.stop.prevent="toggleRemove(presentation.id)"
         />
         <ConfirmMessage
           class="confirm-message"
-          message="Are you sure to delete this presentation?"
+          :message="$t('deletePresentation')"
           :confirm="pendingDeleteId !== null"
           @confirm="removePresentation(presentation.id)"
           @cancel="toggleRemove(null)"

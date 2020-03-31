@@ -1,7 +1,7 @@
 <template>
   <aside class="sidebar">
     <Title>
-      <Button class="add" title="Add Slide" @click="newSlide" />
+      <Button class="add" :title="$t('addNew', ['slide'])" @click="newSlide" />
     </Title>
 
     <div class="presentation-config">
@@ -14,8 +14,10 @@
 
     <div class="list">
       <div v-if="isNoSlide" class="no-slides">
-        <span>There is no slides yet.</span>
-        <Button class="create" @click="newSlide">Create one</Button>
+        <span>{{ $t('noSlides') }}</span>
+        <Button class="create" @click="newSlide">{{
+          $t('addNew', ['slide'])
+        }}</Button>
       </div>
       <draggable v-model="sortedList">
         <SidebarItem
@@ -27,7 +29,7 @@
         />
       </draggable>
     </div>
-    <Button class="presentation" @click="present">Presentation mode</Button>
+    <Button class="presentation" @click="present">{{ $t('present') }}</Button>
   </aside>
 </template>
 
