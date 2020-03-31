@@ -10,7 +10,6 @@ const env = process.env.NODE_ENV === 'production' ? 'production' : 'development'
 const plugins = [
   new VueLoaderPlugin(),
   new HtmlWebpackPlugin({
-    template: 'src/index.html',
     favicon: 'src/favicon.ico',
   }),
   new webpack.DefinePlugin({
