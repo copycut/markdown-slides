@@ -24,13 +24,14 @@ yarn test
 
 ### Stack
 
-- [ ] Use Docker
+- [x] Use Docker
 
 ### Features
 
-- [ ] Review design
-- [ ] Add routing
-- [ ] Add multiples presentations management
+- [x] Review design
+- [x] Add routing
+- [x] Add multiples presentations management
+- [x] Add translations
 - [ ] Add user based management
 - [ ] Add save to DB or export to json
 
