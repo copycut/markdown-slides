@@ -18,7 +18,7 @@
   "dependencies": {
     "@vue/test-utils": "^1.0.0-beta.32",
     "jest": "^25.2.4",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "marked": "^0.8.2",
     "uid": "^1.0.0",
     "vue": "^2.6.11",
